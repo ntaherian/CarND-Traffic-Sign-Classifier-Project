@@ -88,8 +88,6 @@ Here are five German traffic signs that I found on the web:
 ![alt text][image7] ![alt text][image8]
 
 
-####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
-
 Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
@@ -101,7 +99,7 @@ Here are the results of the prediction:
 | Slippery Road			| Right-of-way at the next intersection      	|
 
 
-The model was able to correctly guess 3 of the 5 traffic signs, which gives an accuracy of 60%. 
+The model was able to correctly guess 3 of the 5 traffic signs, which gives an accuracy of 60%. The result of the new images is much lower than the result in test set. One reason that comes to mind is the fact that we resized these new images to 32x32 to be able to use the trained network. resizing the images have introduced distortion and as a result for example fo the sign of pedestrian in missclassifies it to no passing due to artifacts introduced by resizing the image. Same happens for other traffic signs. Finding images with smaller sized would have been better for this section, since resizing wouldn't be causisng it much artifacts.
 
 
 
