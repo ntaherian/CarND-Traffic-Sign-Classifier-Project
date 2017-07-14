@@ -55,7 +55,7 @@ My final model consisted of the following layers:
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
 | Input         		| 32x32x3 RGB image   							| 
-| Convolution 5x5     	| 1x1 stride, valid padding, outputs 28x28x46 	|
+| Convolution 7x7     	| 1x1 stride, valid padding, outputs 28x28x46 	|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride,  outputs 14x14x46 				|
 | Convolution 5x5	    | 1x1 stride, valid padding, outputs 10x10x56   |
@@ -72,8 +72,8 @@ I trained my model using AdamOptimizer with batch size of 128 and 30 Epochs and 
 
 
 #### My final model results were:
-* validation set accuracy of: 0.920  
-* test set accuracy of: 0.916 
+* validation set accuracy of: 0.93  
+* test set accuracy of: 0.917 
 
 
 The first architecture used was Lenet, but since the training accuracy was not as high as expected I changed the architecture to exract more features in order to increase the accuracy to 0.92. Sice the accuracy on Validation set was also 0.91 this shows that over fitting did not occur. 
