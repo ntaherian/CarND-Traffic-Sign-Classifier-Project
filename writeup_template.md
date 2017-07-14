@@ -72,7 +72,7 @@ I trained my model using AdamOptimizer with batch size of 128 and 30 Epochs and 
 
 
 #### My final model results were:
-* validation set accuracy of: 0.93  
+* validation set accuracy of: 0.934 
 * test set accuracy of: 0.917 
 
 
