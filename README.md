@@ -1,54 +1,103 @@
-## Project: Build a Traffic Sign Recognition Program
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+#**Traffic Sign Recognition** 
 
-Overview
 ---
-In this project, you will use what you've learned about deep neural networks and convolutional neural networks to classify traffic signs. You will train and validate a model so it can classify traffic sign images using the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset). After the model is trained, you will then try out your model on images of German traffic signs that you find on the web.
 
-We have included an Ipython notebook that contains further instructions 
-and starter code. Be sure to download the [Ipython notebook](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb). 
+**Build a Traffic Sign Recognition Project**
 
-We also want you to create a detailed writeup of the project. Check out the [writeup template](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup. The writeup can be either a markdown file or a pdf document.
-
-To meet specifications, the project will require submitting three files: 
-* the Ipython notebook with the code
-* the code exported as an html file
-* a writeup report either as a markdown or pdf file 
-
-Creating a Great Writeup
----
-A great writeup should include the [rubric points](https://review.udacity.com/#!/rubrics/481/view) as well as your description of how you addressed each point.  You should include a detailed description of the code used in each step (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
-
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
-
-The Project
----
-The goals / steps of this project are the following:
-* Load the data set
+Steps of this project are the following:
+* Load the data set (see below for links to the project data set)
 * Explore, summarize and visualize the data set
 * Design, train and test a model architecture
 * Use the model to make predictions on new images
 * Analyze the softmax probabilities of the new images
 * Summarize the results with a written report
 
-### Dependencies
-This lab requires:
 
-* [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit)
+[//]: # (Image References)
 
-The lab environment can be created with CarND Term1 Starter Kit. Click [here](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) for the details.
+[image4]: ./img1.jpg "Traffic Sign 1"
+[image5]: ./img2.jpg "Traffic Sign 2"
+[image6]: ./img3.jpg "Traffic Sign 3"
+[image7]: ./img4.jpg "Traffic Sign 4"
+[image8]: ./img5.jpg "Traffic Sign 5"
 
-### Dataset and Repository
 
-1. Download the data set. The classroom has a link to the data set in the "Project Instructions" content. This is a pickled dataset in which we've already resized the images to 32x32. It contains a training, validation and test set.
-2. Clone the project, which contains the Ipython notebook and the writeup template.
-```sh
-git clone https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project
-cd CarND-Traffic-Sign-Classifier-Project
-jupyter notebook Traffic_Sign_Classifier.ipynb
-```
+## Data Set Summary & Exploration
 
-### Requirements for Submission
-Follow the instructions in the `Traffic_Sign_Classifier.ipynb` notebook and write the project report using the writeup template as a guide, `writeup_template.md`. Submit the project code and writeup document.
+Here is a basic summary of the data used.
+
+I used the Numpy library to calculate summary statistics of the traffic
+signs data set:
+
+* The size of training set is ? 34799 
+* The size of the validation set is ? 4410 
+* The size of test set is ? 12630 
+* The shape of a traffic sign image is ? 32x32x3
+* The number of unique classes/labels in the data set is ? 43
+
+## Exploratory visualization of the dataset.
+
+
+### 1.
+As a first step, I Normalized all images in the training by subtracting each pixel from the mean of image and then deviding the result by the mean.
+
+### 2.
+I then augmented the data by filipping all images onece from left to right and another time from bottom to up. This tripled the size of my training set allowing me to train my network on larger number of examples.
+
+
+The difference between the original data set and the augmented data set is the following: The size of training set is 104397 
+
+
+## Network Model
+
+My final model consisted of the following layers:
+
+| Layer         		|     Description	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Input         		| 32x32x3 RGB image   							| 
+| Convolution 7x7     	| 1x1 stride, valid padding, outputs 28x28x46 	|
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  outputs 14x14x46 				|
+| Convolution 5x5	    | 1x1 stride, valid padding, outputs 10x10x56   |
+| Max pooling           | 2x2 stride,  outputs 5x5x56                   |
+| RELU	                |                                               |
+| Fully connected		| 1400 input 300 output        				    |
+| RELU                  |                                               |
+| Fully connected      	| 300 input 54 output        				    |
+| RELU					|												|
+| Fully connected 		| 54 input 43 output 							|
+ 
+
+I trained my model using AdamOptimizer with batch size of 128 and 30 Epochs and learning rate of 0.001
+
+
+#### My final model results were:
+* validation set accuracy of: 0.934 
+* test set accuracy of: 0.917 
+
+
+The first architecture used was Lenet, but since the training accuracy was not as high as expected I changed the architecture to exract more features in order to increase the accuracy to 0.92. Sice the accuracy on Validation set was also 0.91 this shows that over fitting did not occur. 
+
+
+ ### Test a Model on New Images
+
+
+Here are five German traffic signs that I found on the web:
+
+![alt text][image4] ![alt text][image5] ![alt text][image6] 
+![alt text][image7] ![alt text][image8]
+
+
+Here are the results of the prediction:
+
+| Image			        |     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Speed limit (30km/h)  |Speed limit (30km/h)  						    | 
+| General caution    	| General caution 								|
+|Right-of-way at the next intersection| Right-of-way at the next intersection|
+| Pedestrians      		| No passing					 				|
+| Slippery Road			| Right-of-way at the next intersection      	|
+
+
+The model was able to correctly guess 3 of the 5 traffic signs, which gives an accuracy of 60%. The result of the new images is much lower than the result in test set. One reason that comes to mind is the fact that we resized these new images to 32x32 to be able to use the trained network. resizing the images have introduced distortion and as a result for example fo the sign of pedestrian in missclassifies it to no passing due to artifacts introduced by resizing the image. Same happens for other traffic signs. Finding images with smaller sized would have been better for this section, since resizing wouldn't be causisng it much artifacts.
+
